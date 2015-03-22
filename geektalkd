@@ -53,7 +53,7 @@ while(1) {
 		if($@) { logmsg("Errors parsing functions!  Try 'perl -wc functions'"); }
 		$rehash = 0;
 	}
-	# keep runing processClients over and over to detect and process activity
+	# keep running processClients over and over to detect and process activity
 	processClients();
 }
 
@@ -75,7 +75,7 @@ sub checkperm() {
 	}
 }
 
-# ***  forkServer  ***
+# ***  forkServer()  ***
 # Forks the server to the background.
 sub forkServer {
 	my $pid;
@@ -116,7 +116,7 @@ sub options {
 		} elsif($option eq "-d") {
 			$debug = 1;
 		} elsif($option eq "-p") {
-			$option = shift @ARGV;
+			$option = shift(@ARGV);
 			if($option =~ /^\d+$/ && $option > 0 && $option < 65535) {
 				$port = $option;
 			} else {
@@ -142,7 +142,7 @@ sub options {
 }
 
 # ***  startServer()  ***
-# Set up server connection options and start listening
+# Set up server connection options and start listening.
 sub startServer {
 	socket(Server, PF_INET, SOCK_STREAM, getprotobyname('tcp')) or die "socket: $!";
 	setsockopt(Server, SOL_SOCKET, SO_REUSEADDR, 1) or die "setsockopt: $!";
